@@ -1,6 +1,6 @@
-/[Ll]ibrary/*
-/[Tt]emp/*
-/[Oo]bj/*
-/[Bb]uild/*
-/[Bb]uilds/*
+Library/
+Temp/
+Obj/
+Build/
+Builds/
 Assets/AssetStoreTools*

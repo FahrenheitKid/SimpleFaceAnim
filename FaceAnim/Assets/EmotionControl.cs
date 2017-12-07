@@ -54,9 +54,8 @@ enum Idx
     Lip_up_l,
     Lip_up_r
 
-
-
 }
+
 public class EmotionControl : MonoBehaviour {
 
     // emotions in between are the sum of those feelings
@@ -65,28 +64,28 @@ public class EmotionControl : MonoBehaviour {
     
 
     // anger, happy, surprise, sad, fear and disgust
-    [Range(0, 100)]
+    [Range(0, 1)]
     public float ecstasy; // >  joy > serenity | opposite: grief
     // love
-    [Range(0, 100)]
+    [Range(0, 1)]
     public float admiration; // > trust > acceptance | opposite: loathing
     // submission
-    [Range(0, 100)]
+    [Range(0, 1)]
     public float terror; // > fear > apprehension | opposite: rage
     // awe
-    [Range(0, 100)]
+    [Range(0, 1)]
     public float amazement; // > surprise > distraction | opposite: vigilance
     // disapproval
-    [Range(0, 100)]
+    [Range(0, 1)]
     public float grief; // > sadness > pensiveness | opposite: ecstasy
     // remorse
-    [Range(0, 100)]
+    [Range(0, 1)]
     public float loathing; // > disgust > boredom | opposite: admiration
     //contempt
-    [Range(0, 100)]
+    [Range(0, 1)]
     public float rage; // > anger > annoyance | opposite: terror
     //agressiveness
-    [Range(0, 100)]
+    [Range(0, 1)]
     public float vigilance; // > anticipation > interest | opposite: amazement
     //optimisim
 
