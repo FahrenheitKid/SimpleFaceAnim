@@ -267,14 +267,19 @@ public class EmotionControl : MonoBehaviour
         final_Lerp = getAveragePose(basic_poses_end, weights);
 
         
+        
+        applyPose(getLerpPose(initial_Lerp, final_Lerp, getWeightsSum()));
+    }
+
+    public float getWeightsSum()
+    {
         float weightsum = 0;
         for (int i = 0; i < weights.Count; i++)
         {
             weightsum += weights[i];
         }
-        applyPose(getLerpPose(initial_Lerp, final_Lerp, weightsum));
+        return weightsum;
     }
-
     //seta a variavel current pose com uma nova pose
     public void setCurrentPose(Pose p)
     {
@@ -963,6 +968,7 @@ public class EmotionControl : MonoBehaviour
 
     private void handleSlidersValues()
     {
+        limitSlidersTo(1);
         weights[(int)EmotionIdx.ecstasy] = ecstasy;
         weights[(int)EmotionIdx.admiration] = admiration;
         weights[(int)EmotionIdx.terror] = terror;
@@ -971,6 +977,32 @@ public class EmotionControl : MonoBehaviour
         weights[(int)EmotionIdx.loathing] = loathing;
         weights[(int)EmotionIdx.rage] = rage;
         weights[(int)EmotionIdx.vigilance] = vigilance;
+        limitSlidersTo(1);
+    }
+
+    void limitSlidersTo(float limit)
+    {
+        print("getweitghSum =" + getWeightsSum() + " e limit == " + limit);
+        
+        // WHAT KIND OF SORCERY IS THIS?
+        if(getWeightsSum() > limit)
+        {
+            //find extrapolating value
+            print("passou");
+            float total_exceeded = getWeightsSum() - limit;
+
+            float distribution = total_exceeded / 8;
+
+            for (int i = 0; i < weights.Count; i++)
+            {
+                weights[i] -= distribution;
+                if (weights[i] < 0) weights[i] = 0;
+                if (weights[i] > limit) weights[i] = limit;
+            }
+
+
+
+        }
     }
 
     private void initPoses()
