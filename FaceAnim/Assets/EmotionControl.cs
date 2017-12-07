@@ -982,13 +982,13 @@ public class EmotionControl : MonoBehaviour
 
     void limitSlidersTo(float limit)
     {
-        print("getweitghSum =" + getWeightsSum() + " e limit == " + limit);
+        //print("getweitghSum =" + getWeightsSum() + " e limit == " + limit);
 
         // WHAT KIND OF SORCERY IS THIS?
         if (getWeightsSum() > limit)
         {
             //find extrapolating value
-            print("passou");
+            //print("passou");
             float total_exceeded = getWeightsSum() - limit;
 
             float distribution = total_exceeded / 8;
