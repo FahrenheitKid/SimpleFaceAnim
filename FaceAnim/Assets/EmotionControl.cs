@@ -152,6 +152,7 @@ public class EmotionControl : MonoBehaviour
     // emotions in between are the sum of those feelings
 
     public SkinnedMeshRenderer head;
+    public UpdateSliders uiScript;
 
     public List<Pose> basic_poses_init;
     public List<Pose> basic_poses_end;
@@ -968,7 +969,6 @@ public class EmotionControl : MonoBehaviour
 
     private void handleSlidersValues()
     {
-        limitSlidersTo(1);
         weights[(int)EmotionIdx.ecstasy] = ecstasy;
         weights[(int)EmotionIdx.admiration] = admiration;
         weights[(int)EmotionIdx.terror] = terror;
@@ -983,9 +983,9 @@ public class EmotionControl : MonoBehaviour
     void limitSlidersTo(float limit)
     {
         print("getweitghSum =" + getWeightsSum() + " e limit == " + limit);
-        
+
         // WHAT KIND OF SORCERY IS THIS?
-        if(getWeightsSum() > limit)
+        if (getWeightsSum() > limit)
         {
             //find extrapolating value
             print("passou");
@@ -998,10 +998,40 @@ public class EmotionControl : MonoBehaviour
                 weights[i] -= distribution;
                 if (weights[i] < 0) weights[i] = 0;
                 if (weights[i] > limit) weights[i] = limit;
+
+                if (i == (int)EmotionIdx.ecstasy) ecstasy -= distribution;
+                if (ecstasy < 0) ecstasy = 0;
+                if (ecstasy > limit) ecstasy = limit;
+
+                if (i == (int)EmotionIdx.admiration) admiration -= distribution;
+                if (admiration < 0) admiration = 0;
+                if (admiration > limit) admiration = limit;
+
+                if (i == (int)EmotionIdx.terror) terror -= distribution;
+                if (terror < 0) terror = 0;
+                if (terror > limit) terror = limit;
+
+                if (i == (int)EmotionIdx.amazement) amazement -= distribution;
+                if (amazement < 0) amazement = 0;
+                if (amazement > limit) amazement = limit;
+
+                if (i == (int)EmotionIdx.grief) grief -= distribution;
+                if (grief < 0) grief = 0;
+                if (grief > limit) grief = limit;
+
+                if (i == (int)EmotionIdx.loathing) loathing -= distribution;
+                if (loathing < 0) loathing = 0;
+                if (loathing > limit) loathing = limit;
+
+                if (i == (int)EmotionIdx.rage) rage -= distribution;
+                if (rage < 0) rage = 0;
+                if (rage > limit) rage = limit;
+
+                if (i == (int)EmotionIdx.vigilance) vigilance -= distribution;
+                if (vigilance < 0) vigilance = 0;
+                if (vigilance > limit) vigilance = limit;
             }
-
-
-
+            uiScript.UpdateUI();
         }
     }
 
